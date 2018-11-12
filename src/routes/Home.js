@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import { css } from 'emotion';
 import styled from 'react-emotion';
@@ -25,10 +24,6 @@ const Ul = styled('ul')`
   padding-left: 0;
   margin: 0;
   padding-left: 1rem;
-
-  a {
-    text-decoration: none;
-  }
 `;
 
 const Li = styled('li')`
@@ -37,58 +32,68 @@ const Li = styled('li')`
   margin: 1.2rem;
 `;
 
-const Home = () => {
-  return (
-    <FlexNav>
-      <Right>
-        <OffsetAndOpacityAnimate>
-          {(state) => {
-            const { offset, opacity } = state;
-            return (
-              <Card
-                style={{
-                  transform: `translateY(${offset}px)`
-                }}
-                className={css`
-                  position: relative;
-                  top: 7%;
-                  border-right: 0;
-                  border-top-right-radius: 0;
-                  border-bottom-right-radius: 0;
-                `}
-              >
-                <Ul style={{
-                  opacity: `${opacity}`
-                }}
+// TODO: use react hooks!!!
+class Home extends React.Component {
+  state = {
+    show: true,
+  }
+
+  toggleShow = () => {
+    this.setState({ show: !this.state.show });
+  }
+
+  goTo = target => () => {
+    this.toggleShow();
+    setTimeout(() => {
+      this.props.history.push(target);
+    }, 750);
+  }
+
+  render() {
+    return (
+      <FlexNav>
+        <Right>
+          <OffsetAndOpacityAnimate show={this.state.show}>
+            {(state) => {
+              const { offset, opacity } = state;
+              return (
+                <Card
+                  style={{
+                    transform: `translateY(${offset}px)`
+                  }}
+                  className={css`
+                    position: relative;
+                    top: 7%;
+                    border-right: 0;
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                  `}
                 >
-                  <Link to="/issues">
+                  <Ul style={{
+                    opacity: `${opacity}`
+                  }}
+                  >
                     <Li>
-                      <Button>Issues</Button>
+                      <Button onClick={this.goTo('/issues')}>Issues</Button>
                     </Li>
-                  </Link>
-                  <Link to="/material">
                     <Li>
-                      <Button>Material</Button>
+                      <Button onClick={this.goTo('/material')}>Material</Button>
                     </Li>
-                  </Link>
-                  <Link to="/events">
                     <Li>
-                      <Button>Events</Button>
+                      <Button onClick={this.goTo('/events')}>Events</Button>
                     </Li>
-                  </Link>
-                  <Link to="/settings">
                     <Li>
-                      <Button>Setting</Button>
+                      <Button onClick={this.goTo('/setting')}>Setting</Button>
                     </Li>
-                  </Link>
-                </Ul>
-              </Card>
-            );
-          }}
-        </OffsetAndOpacityAnimate>
-      </Right>
-    </FlexNav>
-  );
+                  </Ul>
+                </Card>
+              );
+            }}
+          </OffsetAndOpacityAnimate>
+        </Right>
+      </FlexNav>
+    );
+  }
 };
 
 export default Home;
