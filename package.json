@@ -5,13 +5,15 @@
   "dependencies": {
     "d3-ease": "^1.0.5",
     "emotion": "^9.2.12",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
+    "ky": "^0.5.1",
+    "react": "^16.7.0-alpha.2",
+    "react-dom": "16.7.0-alpha.2",
     "react-emotion": "^9.2.12",
     "react-move": "^2.8.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "2.0.5"
+    "react-scripts": "2.0.5",
+    "react-use": "^4.10.0"
   },
   "scripts": {
     "start": "react-scripts start",

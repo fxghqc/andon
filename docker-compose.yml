@@ -1,0 +1,10 @@
+version: '3'
+services:
+  # web:
+  #   build: .
+  #   ports:
+  #    - "5000:5000"
+  cms:
+    image: "agentejo/cockpit"
+    ports:
+      - "8282:80"
